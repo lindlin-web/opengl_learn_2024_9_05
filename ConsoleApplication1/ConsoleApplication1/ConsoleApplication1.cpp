@@ -75,7 +75,7 @@ int main()
 	// build and compile shaders
 	// -------------------------
 	Shader shader("11.1.anti_aliasing.vs", "11.1.anti_aliasing.fs");
-
+	Shader screenShader("11.2.aa_post.vs", "11.2.aa_post.fs");
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------
 	float cubeVertices[] = {
@@ -133,6 +133,28 @@ int main()
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
 
+	float quadVertices[] = {   // vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.
+		// positions   // texCoords
+		-1.0f,  1.0f,  0.0f, 1.0f,
+		-1.0f, -1.0f,  0.0f, 0.0f,
+		 1.0f, -1.0f,  1.0f, 0.0f,
+
+		-1.0f,  1.0f,  0.0f, 1.0f,
+		 1.0f, -1.0f,  1.0f, 0.0f,
+		 1.0f,  1.0f,  1.0f, 1.0f
+	};
+
+	// setup screen VAO
+	unsigned int quadVAO, quadVBO;
+	glGenVertexArrays(1, &quadVAO);
+	glGenBuffers(1, &quadVBO);
+	glBindVertexArray(quadVAO);
+	glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
 
 	// configure MSAA framebuffer
 	// --------------------------
@@ -159,6 +181,28 @@ int main()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 
+
+	// configure second post-processing framebuffer
+	unsigned int intermediateFBO;
+	glGenFramebuffers(1, &intermediateFBO);
+	glBindFramebuffer(GL_FRAMEBUFFER, intermediateFBO);
+	// create a color attachment texture
+	unsigned int screenTexture;
+	glGenTextures(1, &screenTexture);
+	glBindTexture(GL_TEXTURE_2D, screenTexture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SCR_WIDTH, SCR_HEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, screenTexture, 0);	// we only need a color buffer
+
+	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+		std::cout << "ERROR::FRAMEBUFFER:: Intermediate framebuffer is not complete!" << std::endl;
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	// shader configuration
+	// --------------------
+	screenShader.use();
+	screenShader.setInt("screenTexture", 0);
 
 	// render loop
 	// -----------
@@ -196,17 +240,24 @@ int main()
 
 		glBindVertexArray(cubeVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-
-
+		
 		// 2. now blit multisampled buffer(s) to normal colorbuffer of intermediate FBO. Image is stored in screenTexture
 		glBindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer);
-		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, intermediateFBO);
 		glBlitFramebuffer(0, 0, SCR_WIDTH, SCR_HEIGHT, 0, 0, SCR_WIDTH, SCR_HEIGHT, GL_COLOR_BUFFER_BIT, GL_NEAREST);
-
 
 		// 3. now render quad with scene's visuals as its texture image
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glDisable(GL_DEPTH_TEST);
 
+		// draw Screen quad
+		screenShader.use();
+		glBindVertexArray(quadVAO);
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, screenTexture); // use the now resolved color attachment as the quad's texture
+		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
