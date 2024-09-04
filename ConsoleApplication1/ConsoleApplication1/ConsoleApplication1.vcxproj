@@ -167,6 +167,13 @@
     <None Include="11.1.anti_aliasing.vs" />
     <None Include="11.2.aa_post.fs" />
     <None Include="11.2.aa_post.vs" />
+    <None Include="7.bloom.fs" />
+    <None Include="7.bloom.vs" />
+    <None Include="7.bloom_final.fs" />
+    <None Include="7.bloom_final.vs" />
+    <None Include="7.blur.fs" />
+    <None Include="7.blur.vs" />
+    <None Include="7.light_box.fs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

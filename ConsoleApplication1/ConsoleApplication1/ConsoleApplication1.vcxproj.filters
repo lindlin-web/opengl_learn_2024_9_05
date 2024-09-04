@@ -55,5 +55,26 @@
     <None Include="11.2.aa_post.fs">
       <Filter>源文件\shaders</Filter>
     </None>
+    <None Include="7.bloom.vs">
+      <Filter>源文件\shaders</Filter>
+    </None>
+    <None Include="7.bloom.fs">
+      <Filter>源文件\shaders</Filter>
+    </None>
+    <None Include="7.light_box.fs">
+      <Filter>源文件\shaders</Filter>
+    </None>
+    <None Include="7.blur.vs">
+      <Filter>源文件\shaders</Filter>
+    </None>
+    <None Include="7.blur.fs">
+      <Filter>源文件\shaders</Filter>
+    </None>
+    <None Include="7.bloom_final.vs">
+      <Filter>源文件\shaders</Filter>
+    </None>
+    <None Include="7.bloom_final.fs">
+      <Filter>源文件\shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
