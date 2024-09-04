@@ -13,10 +13,41 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\source">
+      <UniqueIdentifier>{dd504659-c4df-4abd-8f9e-698fb97d19ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\shaders">
+      <UniqueIdentifier>{0bf0cd6b-10c1-4211-b95b-085c22cd67db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\images">
+      <UniqueIdentifier>{c2c8777f-2846-4b29-ab39-b33f9769ce35}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="source\glad.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\image.h">
+      <Filter>源文件\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Shader.h">
+      <Filter>源文件\source</Filter>
+    </ClInclude>
+    <ClInclude Include="source\camera.h">
+      <Filter>源文件\source</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="11.1.anti_aliasing.fs">
+      <Filter>源文件\shaders</Filter>
+    </None>
+    <None Include="11.1.anti_aliasing.vs">
+      <Filter>源文件\shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

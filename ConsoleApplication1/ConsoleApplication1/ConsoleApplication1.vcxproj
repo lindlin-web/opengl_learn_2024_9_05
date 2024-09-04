@@ -72,6 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>D:\lind_learn\opengl_learn_2024_9_05\ConsoleApplication1\ConsoleApplication1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\lind_learn\opengl_learn_2024_9_05\ConsoleApplication1\ConsoleApplication1\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -95,6 +97,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -152,6 +155,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp" />
+    <ClCompile Include="source\glad.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\camera.h" />
+    <ClInclude Include="source\image.h" />
+    <ClInclude Include="source\Shader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="11.1.anti_aliasing.fs" />
+    <None Include="11.1.anti_aliasing.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
