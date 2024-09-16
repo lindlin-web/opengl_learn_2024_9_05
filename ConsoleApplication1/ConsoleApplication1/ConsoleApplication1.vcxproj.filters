@@ -27,11 +27,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ConsoleApplication1.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="source\glad.c">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleApplication1.cpp">
+      <Filter>资源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +98,30 @@
       <Filter>源文件\shaders</Filter>
     </None>
     <None Include="8.1.deferred_light_box.fs">
+      <Filter>源文件\shaders</Filter>
+    </None>
+    <None Include="1.texture.vs">
+      <Filter>源文件\shaders</Filter>
+    </None>
+    <None Include="1.texture.fs">
+      <Filter>源文件\shaders</Filter>
+    </None>
+    <None Include="9.ssao_geometry.vs">
+      <Filter>源文件\shaders</Filter>
+    </None>
+    <None Include="9.ssao_geometry.fs">
+      <Filter>源文件\shaders</Filter>
+    </None>
+    <None Include="9.ssao.vs">
+      <Filter>源文件\shaders</Filter>
+    </None>
+    <None Include="9.ssao.fs">
+      <Filter>源文件\shaders</Filter>
+    </None>
+    <None Include="9.ssao_blur.fs">
+      <Filter>源文件\shaders</Filter>
+    </None>
+    <None Include="9.ssao_lighting.fs">
       <Filter>源文件\shaders</Filter>
     </None>
   </ItemGroup>
