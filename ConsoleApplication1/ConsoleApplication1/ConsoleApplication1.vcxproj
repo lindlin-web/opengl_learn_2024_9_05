@@ -157,15 +157,6 @@
     <ClCompile Include="ConsoleApplication1.cpp" />
     <ClCompile Include="source\glad.c" />
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="source\camera.h" />
-    <ClInclude Include="source\image.h" />
-    <ClInclude Include="source\Shader.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="11.1.anti_aliasing.fs" />
-    <None Include="11.1.anti_aliasing.vs" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

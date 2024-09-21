@@ -31,23 +31,4 @@
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="source\image.h">
-      <Filter>源文件\source</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Shader.h">
-      <Filter>源文件\source</Filter>
-    </ClInclude>
-    <ClInclude Include="source\camera.h">
-      <Filter>源文件\source</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="11.1.anti_aliasing.fs">
-      <Filter>源文件\shaders</Filter>
-    </None>
-    <None Include="11.1.anti_aliasing.vs">
-      <Filter>源文件\shaders</Filter>
-    </None>
-  </ItemGroup>
 </Project>
